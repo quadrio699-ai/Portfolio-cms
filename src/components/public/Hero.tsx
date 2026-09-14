@@ -12,7 +12,7 @@ export function Hero({ about, cv }: { about: About; cv: Cv | null }) {
   const links = Object.entries(about.social_links ?? {}).filter(([, v]) => v);
 
   return (
-    <section className="mx-auto max-w-2xl px-6 pt-20 pb-16 sm:pt-28">
+    <section id="about" className="mx-auto max-w-2xl px-6 pt-20 pb-16 sm:pt-28">
       <div className="flex flex-col items-center gap-6 text-center sm:flex-row sm:items-start sm:gap-7 sm:text-left">
         {about.avatar_path && (
           <img
