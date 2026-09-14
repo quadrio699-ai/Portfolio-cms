@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { Header } from "@/components/public/Header";
 import { Hero } from "@/components/public/Hero";
 import { Skills } from "@/components/public/Skills";
 import { Projects } from "@/components/public/Projects";
@@ -41,6 +42,7 @@ export default async function Home() {
 
   return (
     <>
+      <Header />
       <Hero about={about} cv={cvRes.data} />
       <Skills skills={skillsRes.data ?? []} />
       <Projects projects={projectsRes.data ?? []} />
