@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { Header } from "@/components/public/Header";
 import { Hero } from "@/components/public/Hero";
 import { Skills } from "@/components/public/Skills";
+import { Experience } from "@/components/public/Experience";
 import { Projects } from "@/components/public/Projects";
 import { EducationAndCertifications } from "@/components/public/EducationAndCertifications";
 import { Contact } from "@/components/public/Contact";
@@ -10,6 +11,7 @@ import type {
   Certification,
   Cv,
   Education,
+  Experience as ExperienceEntry,
   Project,
   Skill,
 } from "@/lib/types";
@@ -19,11 +21,12 @@ export const dynamic = "force-dynamic";
 export default async function Home() {
   const supabase = await createClient();
 
-  const [aboutRes, cvRes, skillsRes, projectsRes, educationRes, certsRes] =
+  const [aboutRes, cvRes, skillsRes, experienceRes, projectsRes, educationRes, certsRes] =
     await Promise.all([
       supabase.from("about").select("*").eq("id", 1).single<About>(),
       supabase.from("cv").select("*").eq("id", 1).single<Cv>(),
       supabase.from("skills").select("*").order("category").order("sort_order").returns<Skill[]>(),
+      supabase.from("experience").select("*").order("sort_order").returns<ExperienceEntry[]>(),
       supabase.from("projects").select("*").order("featured", { ascending: false }).order("sort_order").returns<Project[]>(),
       supabase.from("education").select("*").order("sort_order").returns<Education[]>(),
       supabase.from("certifications").select("*").order("sort_order").returns<Certification[]>(),
@@ -45,6 +48,7 @@ export default async function Home() {
       <Header />
       <Hero about={about} cv={cvRes.data} />
       <Skills skills={skillsRes.data ?? []} />
+      <Experience entries={experienceRes.data ?? []} />
       <Projects projects={projectsRes.data ?? []} />
       <EducationAndCertifications
         education={educationRes.data ?? []}
