@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+/* Self-hosted fonts (no external requests at runtime) */
+@import "@fontsource/fraunces/400.css";
+@import "@fontsource/fraunces/500.css";
+@import "@fontsource/fraunces/600.css";
+@import "@fontsource/fraunces/900.css";
+@import "@fontsource/fraunces/600-italic.css";
+@import "@fontsource/ibm-plex-sans/400.css";
+@import "@fontsource/ibm-plex-sans/500.css";
+@import "@fontsource/ibm-plex-sans/600.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+
+@theme {
+  /* Core palette — ink & paper, one warm signal accent, one cool
+     "circuit" accent reserved for the admin/functional surfaces. */
+  --color-ink: #14181f;
+  --color-ink-soft: #2a303b;
+  --color-paper: #fbfaf7;
+  --color-panel: #f1efe9;
+  --color-line: #ddd9cf;
+  --color-signal: #c97a2c;
+  --color-signal-soft: #e8b378;
+  --color-circuit: #2c5f6f;
+  --color-circuit-soft: #6b98a4;
+  --color-live: #3f7d58;
+  --color-muted: #8a8577;
+
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: var(--color-signal);
+  color: var(--color-paper);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-circuit);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
